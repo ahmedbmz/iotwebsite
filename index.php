@@ -39,30 +39,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="alert alert-primary" id="sens1" role="alert">
-                        <h4 class="alert-heading pt-2">Station n.2</h4>
-                        
-                        <hr>
-
-                        <div class="row">
-                            <div class="col temp"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col hum"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col w_dir">Retriving data...</div>
-                        </div>
-                        <div class="row">
-                            <div class="col w_int"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col r_heig"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <?php
                 // PHP connection to DB
