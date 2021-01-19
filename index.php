@@ -16,104 +16,48 @@
 
             <!-- Real time sensor values -->
             <div class="row">
-                <div class="col">
-                    <div class="alert alert-primary" id="sens0" role="alert">
-                        <h4 class="alert-heading pt-2">Station n.1</h4>
-                            
-                        <hr>
-
-                        <div class="row">
-                            <div class="col temp"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col hum"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col w_dir">Retriving data...</div>
-                        </div>
-                        <div class="row">
-                            <div class="col w_int"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col r_heig"></div>
-                        </div>
-                    </div>
-                </div>
+                
 
             <?php
                 // PHP connection to DB
-                $link = mysqli_connect("localhost", "claudiu", "12345678", "sensors");
-
+                $link = mysqli_connect("bbzj937svfngzjrooibe-mysql.services.clever-cloud.com", "uaxb8xwaqzqfhyg5", "TzBw8FtF0rB9hSVsPXye", "bbzj937svfngzjrooibe");
+                if(!$link)
+                {
+                  die('Could not Connect MySql Server:' .mysql_error());
+                }
                 // Perform SQL queries for both the sensors, retriving past hour data
-                $query = "SELECT * FROM sensors WHERE id = 1 ORDER BY time_id DESC LIMIT 4";
-                $result1 = $link->query( $query );
-
-                $query = "SELECT * FROM sensors WHERE id = 2 ORDER BY time_id DESC LIMIT 4";
-                $result2 = $link->query( $query );
+                $result = mysqli_query($link,"SELECT * FROM detection");
             ?>   
 
             <!-- Last hour sensor values -->
             <div class="row">
                 <div class="col">
                     <div class="alert alert-primary" role="alert">
-                        <h4 class="alert-heading pt-2">Last hour</h4>
-                            
-                        <hr>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Temp</th>
-                                    <th scope="col">Hum</th>
-                                    <th scope="col">W. Dir</th>
-                                    <th scope="col">W. Int</th>
-                                    <th scope="col">R. Heig</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Decode messages and print values -->
-                                <?php while( $row = $result1->fetch_array(  ) ) {
-                                    $data = json_decode( $row["data"] );
-
-                                   echo '<tr>
-                                        <td>'. $data->temp. ' °C</td>
-                                        <td>'. $data->hum. '%</td>
-                                        <td>'. $data->w_dir. '°</td>
-                                        <td>'. $data->w_int. ' m/s</td>
-                                        <td>'. $data->r_heig. ' mm/h</td>
-                                    </tr>';
-                                } ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="alert alert-primary" role="alert">
-                        <h4 class="alert-heading pt-2">Last hour</h4>
+                        <h4 class="alert-heading pt-2">Detected Values</h4>
                         
                         <hr>
 
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Temp</th>
-                                    <th scope="col">Hum</th>
-                                    <th scope="col">W. Dir</th>
-                                    <th scope="col">W. Int</th>
-                                    <th scope="col">R. Heig</th>
+                                    <th scope="col">Detection Time</th>
+                                    <th scope="col">State</th>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Accuracy</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- Decode messages and print values -->
-                                <?php while( $row = $result2->fetch_array(  ) ) {
-                                    $data = json_decode( $row["data"] );
-
+                                <?php
+                                $i=0;
+                                    while($data = mysqli_fetch_array($result)) {
+                                                        
                                    echo '<tr>
-                                        <td>'. $data->temp. ' °C</td>
-                                        <td>'. $data->hum. '%</td>
-                                        <td>'. $data->w_dir. '°</td>
-                                        <td>'. $data->w_int. ' m/s</td>
-                                        <td>'. $data->r_heig. ' mm/h</td>
+                                        <td>'. $data["curenttime"]. ' </td>
+                                        <td>'. $data["state"]. '</td>
+                                        <td>'. $data["color"]. '</td>
+                                        <td>'. $data["accuracy"]. ' %</td>
+                                        
                                     </tr>';
                                 } ?>
                             </tbody>
