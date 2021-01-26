@@ -43,7 +43,7 @@
                                     <th scope="col">Detection Time</th>
                                     <th scope="col">State</th>
                                     <th scope="col">Color</th>
-                                    <th scope="col">Accuracy</th>
+                                    <th scope="col">Accuracy in %</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,7 +56,7 @@
                                         <td>'. $data["curenttime"]. ' </td>
                                         <td>'. $data["state"]. '</td>
                                         <td>'. $data["color"]. '</td>
-                                        <td>'. $data["accuracy"]. ' %</td>
+                                        <td>'. $data["accuracy"]. '</td>
                                         
                                     </tr>';
                                 } ?>
