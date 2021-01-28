@@ -12,12 +12,8 @@
     </head>
     <body>
         <div class="container mt-5">
-            <h1 class="mb-4">Sensors</h1>
-
-            <!-- Real time sensor values -->
+             
             <div class="row">
-                
-
             <?php
                 // PHP connection to DB
                 $link = mysqli_connect("bbzj937svfngzjrooibe-mysql.services.clever-cloud.com", "uaxb8xwaqzqfhyg5", "TzBw8FtF0rB9hSVsPXye", "bbzj937svfngzjrooibe");
