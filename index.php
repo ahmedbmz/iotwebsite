@@ -22,7 +22,7 @@
                   die('Could not Connect MySql Server:' .mysql_error());
                 }
                 // Perform SQL queries for both the sensors, retriving past hour data
-                $result = mysqli_query($link,"SELECT * FROM detection ORDER BY curenttime DESC");
+                $result = mysqli_query($link,"SELECT * FROM detection ORDER BY curenttime ASC");
             ?>   
 
             <!-- Last hour sensor values -->
