@@ -64,59 +64,6 @@
             
         </div>
         
-        <script>
-            // MQTT broker
-            var HOST = "";
-            var PORT = 8083;
-
-            // Array of stations
-            var stations = [];
-
-            // Callback handlers for connection up and lost
-            function onConnect() {
-                // Once a connection has been made, make a subscription
-                client.subscribe("sensors");
-            }
-
-            function onConnectionLost( responseObject ) {
-                if ( responseObject.errorCode !== 0 ) {
-                    console.log( "onConnectionLost:" + responseObject.errorMessage );
-                }
-            }
-
-            // Callback for received message from MQTT broker
-            function onMessageArrived( message ) {
-                var sens_id;
-                var mess = JSON.parse( message.payloadString );
-
-                // Add station to array
-                if( stations.indexOf( mess.id ) == -1 )
-                    stations.push( mess.id )
-
-                if( mess.id == stations[0] )
-                    sens_id = "#sens0";
-                else if( mess.id == stations[1] )
-                    sens_id = "#sens1";
-
-                // Use JQuery in order to inject data into HTML code
-                if( sens_id ) {
-                    $( sens_id + ' .temp' ).empty().append( "Temperature: <span class='font-weight-bold'>" + mess.data.temp + "</span> °C" );
-                    $( sens_id + ' .hum' ).empty().append( "Humidity: <span class='font-weight-bold'>" + mess.data.hum + "%</span>" );
-                    $( sens_id + ' .w_dir' ).empty().append( "Wind direction: <span class='font-weight-bold'>" + mess.data.w_dir + "°</span>" );
-                    $( sens_id + ' .w_int' ).empty().append( "Wind intensity: <span class='font-weight-bold'>" + mess.data.w_int + "</span> m/s" );
-                    $( sens_id + ' .r_heig' ).empty().append( "Rain height: <span class='font-weight-bold'>" + mess.data.r_heig + "</span> mm/h" );
-                }
-            }
-
-            // Create a client instance with paho javascript api
-            var client = new Paho.MQTT.Client( HOST, Number(PORT), "website" );
-
-            // Set callback handlers
-            client.onConnectionLost = onConnectionLost;
-            client.onMessageArrived = onMessageArrived;
-
-            // Connect the client to MQTT broker
-            client.connect( { onSuccess: onConnect } );
-        </script>
+        
     </body>
 </html>
