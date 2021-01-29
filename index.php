@@ -17,12 +17,6 @@
     </head>
     <body>
         <div class="container mt-5">
-            <h1 class="mb-4 text-center">Sensors</h1>
-
-            <!-- Real time sensor values -->
-            
-                
-
             <?php
 			     require_once __DIR__.'/fusioncharts.php';
                 // PHP connection to DB
